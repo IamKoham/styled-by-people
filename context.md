@@ -165,6 +165,9 @@ The founder prefers desk research over customer interviews; the live TikTok test
 | `styled-by-people-mockup.html` | Built mockup (local only; contains Amazon product photos, so don't publish) |
 | `mockup-images/` | Product photos, the base model and generated outfits |
 | `context.md` | This file |
+| `research/` | Copies of both research reports and their notes |
+
+**GitHub (private):** https://github.com/IamKoham/styled-by-people. The `main` branch is a README for now; all materials are on `project-materials`.
 
 Research reports (one folder up):
 - `../reports/Mid market styling game landscape.md`
