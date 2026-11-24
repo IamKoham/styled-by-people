@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Styled by People Mockup</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: app shell (max 1040px) with a fixed bottom tab bar. Styling screen gives the model the wider column. */
+:root {
+  --bg: #f6f5f9; --surface: #ffffff; --ink: #18172a; --ink-2: #57566c; --ink-3: #8a899c; --rule: #e4e2ec;
+  --accent: #7a2a63; --accent-ink: #ffffff; --accent-soft: #f4e8f0; --backdrop: #efe9f3;
+  --star: #e2a72e; --tag: #2f8f83; --good: #1a7f4b; --warn: #b5481d;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #12111c; --surface: #1c1b29; --ink: #efeef6; --ink-2: #c2c0d3; --ink-3: #9593a9; --rule: #302e43;
+    --accent: #e08ac4; --accent-ink: #1a1020; --accent-soft: #36223c; --backdrop: #252336; --tag: #5cc3b5;
+    --good: #4fc488; --warn: #f08a5d; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { max-width: 1040px; margin: 0 auto; padding: 14px 16px calc(96px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 16px; }
+h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.15; text-wrap: balance; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.note { font-size: 13px; color: var(--ink-3); }
+.pill { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 8px; border-radius: 99px; background: var(--accent-soft); color: var(--accent); }
+.btn { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 10px; padding: 12px 18px; font-weight: 600; text-align: center; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.link { border: 0; background: none; color: var(--ink-2); padding: 0; font-weight: 500; text-decoration: underline; }
+.back { border: 0; background: none; color: var(--ink-2); padding: 0; font-weight: 500; justify-self: start; }
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+
+/* Header */
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 20px; }
+.brand small { display: block; font-family: var(--body); font-weight: 500; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.wallets { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--rule); border-radius: 999px; padding: 5px 6px 5px 10px; font-weight: 600; font-size: 14px; }
+.chip.solo { padding-right: 12px; }
+.coin { width: 16px; height: 16px; border-radius: 50%; background: #e2b33c; box-shadow: inset 0 0 0 2px #c4932a; flex: none; }
+.tagi { width: 18px; height: 18px; flex: none; color: var(--tag); }
+.plus { border: 0; background: var(--accent); color: var(--accent-ink); border-radius: 999px; width: 24px; height: 24px; font-weight: 700; line-height: 1; }
+.cap { font-size: 12px; color: var(--ink-3); font-weight: 500; }
+
+/* Tab bar */
+.tabbar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--rule); display: flex; justify-content: center; gap: 4px;
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px)); z-index: 10; }
+.tabbtn { border: 0; background: none; padding: 8px 18px; border-radius: 10px; display: grid; justify-items: center; gap: 2px; font-size: 12px; font-weight: 600; color: var(--ink-3); min-width: 92px; position: relative; }
+.tabbtn svg { width: 22px; height: 22px; }
+.tabbtn[aria-current="page"] { color: var(--accent); background: var(--accent-soft); }
+.badge { position: absolute; top: 4px; right: 22px; min-width: 16px; height: 16px; border-radius: 99px; background: var(--warn); color: #fff; font-size: 10px; display: grid; place-items: center; padding: 0 4px; }
+
+/* Challenge cards */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.card-art { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; height: 190px; background: var(--backdrop); }
+.card-art img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.card-art.soon { display: grid; place-items: center; grid-template-columns: 1fr; color: var(--ink-3); font-weight: 600; }
+.card-body { padding: 14px 16px 16px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 20px; }
+.facts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--ink-2); align-items: center; }
+.facts b { color: var(--ink); }
+.status { font-size: 13px; font-weight: 600; color: var(--good); }
+
+/* Styling screen: model gets the bigger column */
+.brief { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 16px; display: grid; gap: 8px; }
+.brief h1 { font-size: clamp(22px, 3.6vw, 30px); }
+.brief dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 14px; margin: 0; font-size: 14px; }
+.brief dt { color: var(--ink-3); }
+.brief dd { margin: 0; }
+.studio { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 780px) { .studio { grid-template-columns: 1fr; } }
+.stage { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 14px; display: grid; gap: 12px; position: sticky; top: 12px; }
+@media (max-width: 780px) { .stage { position: static; } }
+.photo { position: relative; width: 100%; margin: 0 auto; aspect-ratio: 687 / 1024; border-radius: 12px; overflow: hidden; background: var(--backdrop); }
+.stage .photo { max-width: 480px; }
+.photo.sm { max-width: 280px; }
+.photo > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo.base > img { filter: saturate(.85) brightness(1.03); }
+.chips { position: absolute; left: 10px; right: 10px; bottom: 10px; display: flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, .9); border-radius: 10px; padding: 8px; }
+.chips .mini { width: 40px; height: 50px; border-radius: 6px; overflow: hidden; background: #fff; flex: none; box-shadow: 0 1px 4px rgba(0, 0, 0, .15); }
+.chips .mini img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
+.chips span.hint { font-size: 12px; font-weight: 600; color: #3a3550; line-height: 1.3; }
+.photo.sm .chips { display: none; }
+.totals { display: grid; gap: 6px; font-size: 14px; }
+.row { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.meter { height: 8px; background: var(--rule); border-radius: 99px; overflow: hidden; }
+.meter i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .25s; }
+.meter.over i { background: var(--warn); }
+.meter.tagm i { background: var(--tag); }
+.warnline { color: var(--warn); font-size: 13px; font-weight: 600; }
+.price-big { font-family: var(--display); font-size: 28px; font-weight: 800; }
+.picker { display: grid; gap: 12px; min-width: 0; }
+.picker h3 { font-size: 15px; }
+.items { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: 8px; }
+.item { background: var(--surface); border: 1.5px solid var(--rule); border-radius: 10px; padding: 6px; text-align: left; display: grid; gap: 4px; align-content: start; }
+.item[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.item img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 20%; border-radius: 6px; background: #fff; }
+.item .name { font-size: 12px; font-weight: 600; line-height: 1.25; }
+.item .price { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.item .cpw { font-size: 11px; color: var(--ink-3); }
+.item-wrap { display: grid; gap: 4px; align-content: start; }
+.buy { font-size: 12px; font-weight: 600; color: var(--accent); text-decoration: none; padding: 2px 4px; }
+.buy:hover { text-decoration: underline; }
+
+/* Vote tab */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.look { background: var(--surface); border: 1.5px solid var(--rule); border-radius: 14px; padding: 10px; display: grid; gap: 8px; text-align: center; align-content: start; }
+button.look:hover { border-color: var(--accent); }
+.look.picked { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.who { font-size: 13px; color: var(--ink-2); }
+.rating { display: grid; gap: 2px; justify-items: center; }
+.stars { color: var(--star); letter-spacing: 2px; font-size: 18px; }
+.stars .off { color: var(--rule); }
+.rating b { font-family: var(--display); font-size: 22px; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.fchip { border: 1px solid var(--rule); background: var(--surface); border-radius: 99px; padding: 6px 12px; font-size: 13px; font-weight: 500; }
+.fchip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.fchip:disabled { opacity: .5; cursor: not-allowed; }
+
+/* My looks */
+.entry { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 780px) { .entry { grid-template-columns: 1fr; } }
+.big { font-family: var(--display); font-size: 56px; font-weight: 800; line-height: 1; color: var(--accent); }
+.big-stars { font-size: 30px; color: var(--star); letter-spacing: 3px; }
+.big-stars .off { color: var(--rule); }
+.clock { font-family: var(--display); font-size: 34px; font-weight: 800; }
+.fb { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
+.shop a { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--rule); color: inherit; text-decoration: none; }
+.shop a:last-child { border-bottom: 0; }
+.shop img { width: 52px; height: 64px; object-fit: cover; object-position: 50% 20%; border-radius: 8px; background: #fff; }
+.shop a:hover .sname { text-decoration: underline; }
+.sname { font-size: 14px; font-weight: 600; }
+.ssub { font-size: 12px; color: var(--ink-3); }
+.row-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.empty { text-align: center; padding: 40px 16px; display: grid; gap: 10px; justify-items: center; }
+
+/* Sheets + toast */
+.sheet-bg { position: fixed; inset: 0; background: rgba(10, 8, 20, .45); display: grid; place-items: center; z-index: 20; padding: 16px; }
+.sheet { background: var(--surface); border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; display: grid; gap: 12px; }
+.sheet h3 { font-size: 22px; }
+.streak { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.streak span { aspect-ratio: 1; border-radius: 10px; background: var(--bg); border: 1px solid var(--rule); display: grid; place-items: center; font-size: 11px; color: var(--ink-3); font-weight: 600; }
+.streak span.done { background: var(--tag); border-color: var(--tag); color: #fff; }
+.streak span.today { border: 2px solid var(--tag); color: var(--tag); }
+.pack { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid var(--rule); border-radius: 12px; padding: 12px 14px; background: var(--bg); text-align: left; width: 100%; }
+.pack b { font-size: 15px; }
+.pack span { font-size: 13px; color: var(--ink-2); }
+.pack .price-tag { font-weight: 700; color: var(--ink); font-size: 15px; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(84px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-size: 14px; z-index: 30; max-width: calc(100% - 32px); }
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<nav class="tabbar" id="tabbar" aria-label="Main"></nav>
+<div id="sheet"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(() => {
+/* ---------- Rules (placeholders, easy to change) ---------- */
+const RULES = { checkin: 10, cap: 30, entry: 5, votesPerReward: 3, voteReward: 5, startTags: 15, startCoins: 200 };
+
+/* ---------- Challenge data ---------- */
+const CHALLENGE = { id: 'interview', title: 'First Job Interview', type: 'Daily', ends: '9h',
+  client: 'Maya', frame: "5'1\", petite frame", goal: 'Look polished and a little taller',
+  occasion: 'Business-casual office interview', budget: 65, prize: 80 };
+const COMING = [ { title: 'Desert Festival Weekend', type: 'Weekly' }, { title: 'The Quiet Luxury Look for Under $200', type: 'Trend' } ];
+/* Prices are placeholders until real ones are added. fit: 0 weak, 1 ok, 2 strong for this brief */
+const ITEMS = [
+  { id: 't1', cat: 'top', name: 'Floral ruffle pleated blouse', img: 'IMG:interview-top-1.jpg.jpg', price: 26, wears: 10, fit: 0,
+    why: 'A bold boho print reads more weekend than interview.', url: 'https://www.amazon.com/dp/B0BZ4WLVR8' },
+  { id: 't2', cat: 'top', name: 'Rust mock-neck pleated blouse', img: 'IMG:interview-top-2.jpg', price: 30, wears: 15, fit: 2,
+    why: 'Polished, warm and confident. The high neck draws the eye up.', url: 'https://www.amazon.com/dp/B0F7RPXRK2' },
+  { id: 't3', cat: 'top', name: 'Navy sleeveless mock-neck knit', img: 'IMG:interview-top-3.jpg', price: 24, wears: 20, fit: 1,
+    why: 'Sleek and simple, though sleeveless needs a blazer for most offices.', url: 'https://www.amazon.com/dp/B0HDSXHBBM' },
+  { id: 'b1', cat: 'bottom', name: 'Brown high-waist pleated wide-leg trousers', img: 'IMG:interview-bottom-1.jpg', price: 36, wears: 20, fit: 1,
+    why: 'Tailored and high-waisted. Brown is softer than black for a first interview.', url: 'https://www.amazon.com/dp/B0HC674XY3' },
+  { id: 'b2', cat: 'bottom', name: 'Black high-waist pleated wide-leg trousers', img: 'IMG:interview-bottom-2.jpg', price: 34, wears: 25, fit: 2,
+    why: 'High waist and a long line make her look taller. A classic choice.', url: 'https://www.amazon.com/dp/B0DN67RR2Z' }
+];
+const BY = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+const BASE_MODEL = 'IMG:Base model.webp';
+const LOOKS = {
+  't2|b1': 'IMG:Outfit1.webp', 't2|b2': 'IMG:outfit 2.webp', 't3|b1': 'IMG:outfit 3.webp',
+  't1|b2': 'IMG:outfit 4.webp', 't3|b2': 'IMG:outfit 5.webp', 't1|b1': 'IMG:outfit 6.webp'
+};
+const HANDLES = ['@dana.styles', '@noor.fits', '@kenzie.k', '@ria.wears', '@mo.edits', '@jules.daily', '@ana.picks', '@lee.looks'];
+const money = n => '$' + n.toFixed(n % 1 ? 2 : 0);
+const TAG_SVG = '<svg class="tagi" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 12.6V4.5C3 3.7 3.7 3 4.5 3h8.1c.4 0 .8.2 1.1.4l7.4 7.4c.6.6.6 1.5 0 2.1l-8.1 8.1c-.6.6-1.5.6-2.1 0l-7.4-7.4c-.3-.3-.5-.7-.5-1zM7.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>';
+const tagsTxt = n => `<span class="num">${n}</span> ${TAG_SVG}`;
+
+/* ---------- Scoring (simulated crowd) ---------- */
+const fitOf = s => (BY[s.top]?.fit || 0) + (BY[s.bottom]?.fit || 0);
+const totalOf = s => (BY[s.top]?.price || 0) + (BY[s.bottom]?.price || 0);
+const starsFor = s => Math.max(1.3, Math.min(4.9, 2.3 + fitOf(s) * 0.6 + (Math.random() - .5) * 0.5));
+const starRow = (v, cls = 'stars') => { const f = Math.round(v); return `<span class="${cls}" aria-label="${v.toFixed(1)} out of 5 stars">${'★'.repeat(f)}<span class="off">${'★'.repeat(5 - f)}</span></span>`; };
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const combos = () => { const out = []; ITEMS.filter(i => i.cat === 'top').forEach(t => ITEMS.filter(i => i.cat === 'bottom').forEach(b => out.push({ top: t.id, bottom: b.id }))); return out; };
+
+/* ---------- State ---------- */
+const KEY = 'sbp-mockup-v2';
+const today = () => new Date().toISOString().slice(0, 10);
+const fresh = () => ({ coins: RULES.startCoins, tags: RULES.startTags, last: null, streak: 0, votes: 0, held: 0, entry: null, day: today() });
+let S; try { S = JSON.parse(localStorage.getItem(KEY)) || fresh(); } catch (e) { S = fresh(); }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+let V = { tab: 'challenges', sub: 'list', sel: {}, match: null, picked: null, sheet: null };
+
+function addTags(n, bought) {
+  if (bought) { S.tags += n; return n; }
+  const room = Math.max(0, RULES.cap - S.tags), add = Math.min(room, n);
+  S.tags += add; return add;
+}
+function collectHeld() { if (S.held > 0) { const add = addTags(S.held, false); S.held -= add; } }
+
+/* ---------- Pieces ---------- */
+function figure(sel, small) {
+  const t = sel.top ? BY[sel.top] : null, b = sel.bottom ? BY[sel.bottom] : null;
+  const look = t && b ? LOOKS[t.id + '|' + b.id] : null;
+  if (look) return `<div class="photo${small ? ' sm' : ''}"><img src="${look}" alt="Maya wearing the ${t.name} with the ${b.name}"></div>`;
+  const chosen = [t, b].filter(Boolean);
+  const hint = t ? 'Now pick trousers' : b ? 'Now pick a top' : 'Pick a top and trousers to dress Maya';
+  return `<div class="photo base${small ? ' sm' : ''}"><img src="${BASE_MODEL}" alt="Maya before styling">
+    <div class="chips">${chosen.map(i => `<span class="mini"><img src="${i.img}" alt="${i.name}"></span>`).join('')}<span class="hint">${hint}</span></div></div>`;
+}
+function header() {
+  return `<div class="bar"><div class="brand">Styled by People<small>Clickable mockup · local</small></div>
+    <div class="wallets"><span class="chip solo"><span class="coin" aria-hidden="true"></span><span class="num">${S.coins}</span></span>
+    <span class="chip">${tagsTxt(S.tags)}<span class="cap">/ ${RULES.cap}</span><button class="plus" data-act="store" aria-label="Get more tags">+</button></span></div></div>`;
+}
+function tabbar() {
+  const pending = S.entry && !S.entry.result ? 0 : 0;
+  const ready = S.entry && S.entry.revealed && !S.entry.seen ? '<span class="badge">1</span>' : '';
+  const t = (id, label, icon) => `<button class="tabbtn" data-act="tab" data-id="${id}" ${V.tab === id ? 'aria-current="page"' : ''}>${icon}${label}${id === 'looks' ? ready : ''}</button>`;
+  return t('challenges', 'Challenges', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>')
+       + t('vote', 'Vote', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7.5" height="16" rx="2"/><rect x="13.5" y="4" width="7.5" height="16" rx="2"/></svg>')
+       + t('looks', 'My looks', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3l4 3 4-3 4 4-3 3v11H7V10L4 7z"/></svg>');
+}
+
+/* ---------- Challenges tab ---------- */
+function listView() {
+  const e = S.entry;
+  return `<div style="display:grid;gap:4px"><h1 style="font-size:28px">Challenges</h1>
+    <p class="note">Each entry costs ${RULES.entry} tags. Get ${RULES.checkin} free every day, earn ${RULES.voteReward} for every ${RULES.votesPerReward} votes, and hold up to ${RULES.cap}.</p></div>
+  <div class="cards">
+    <article class="card"><div class="card-art"><img src="${LOOKS['t2|b2']}" alt=""><img src="${LOOKS['t3|b1']}" alt=""><img src="${LOOKS['t1|b2']}" alt=""></div>
+      <div class="card-body"><div><span class="pill">${CHALLENGE.type}</span></div><h3>${CHALLENGE.title}</h3>
+        <p class="note" style="color:var(--ink-2)">${CHALLENGE.client}, ${CHALLENGE.frame}. ${CHALLENGE.goal}.</p>
+        <div class="facts"><span>Entry <b>${tagsTxt(RULES.entry)}</b></span><span>Budget <b class="num">$${CHALLENGE.budget}</b></span><span>Prize <b class="num">${CHALLENGE.prize}</b> coins</span><span>Ends in ${CHALLENGE.ends}</span></div>
+        ${e ? `<span class="status">${e.revealed ? 'Results are in' : 'Entered · results when it ends'}</span>` : ''}
+        <button class="btn" data-act="open">${e ? 'View or restyle' : 'Start styling'}</button></div></article>
+    ${COMING.map(c => `<article class="card"><div class="card-art soon">Coming soon</div><div class="card-body"><div><span class="pill">${c.type}</span></div><h3>${c.title}</h3>
+      <div class="facts"><span>Entry <b>${tagsTxt(RULES.entry)}</b></span></div><button class="btn ghost" disabled>Opens soon</button></div></article>`).join('')}
+  </div>`;
+}
+function styleView() {
+  const s = V.sel, total = totalOf(s), over = total > CHALLENGE.budget, complete = s.top && s.bottom;
+  const already = !!S.entry, short = !already && S.tags < RULES.entry;
+  const card = it => `<div class="item-wrap"><button class="item" aria-pressed="${s[it.cat] === it.id}" data-act="pick" data-id="${it.id}">
+      <img src="${it.img}" alt="${it.name}"><span class="name">${it.name}</span><span class="price">${money(it.price)}</span>
+      <span class="cpw">${money(it.price / it.wears)} / wear</span></button>
+      <a class="buy" href="${it.url}" target="_blank" rel="noopener noreferrer">Buy on Amazon ↗</a></div>`;
+  let label = already ? 'Update my entry (free)' : `Enter for ${RULES.entry} ${TAG_SVG}`;
+  if (!complete) label = 'Pick a top and trousers';
+  return `<button class="back" data-act="list">← All challenges</button>
+  <div class="brief"><div><span class="pill">${CHALLENGE.type} · ends in ${CHALLENGE.ends}</span></div><h1>${CHALLENGE.title}</h1>
+    <dl><dt>Client</dt><dd>${CHALLENGE.client}, ${CHALLENGE.frame}</dd><dt>Goal</dt><dd>${CHALLENGE.goal}</dd><dt>Occasion</dt><dd>${CHALLENGE.occasion}</dd><dt>Budget</dt><dd class="num">$${CHALLENGE.budget} for the whole look</dd></dl></div>
+  <div class="studio">
+    <div class="stage">${figure(s)}
+      <div class="totals">
+        <div class="row" style="align-items:baseline"><span>Look total</span><span class="price-big num">${money(total)}</span></div>
+        <div class="meter ${over ? 'over' : ''}"><i style="width:${Math.min(100, total / CHALLENGE.budget * 100)}%"></i></div>
+        <div class="row note"><span>Budget $${CHALLENGE.budget}</span><span>${over ? 'Over by ' + money(total - CHALLENGE.budget) : money(CHALLENGE.budget - total) + ' left'}</span></div>
+        ${over ? '<span class="warnline">Over budget. Swap a piece to enter.</span>' : ''}
+        ${short && complete && !over ? `<span class="warnline">You need ${RULES.entry} tags. Vote on looks to earn more, or get tags from the store.</span>` : ''}
+      </div>
+      <button class="btn" data-act="submit" ${(!complete || over || short) ? 'disabled' : ''}>${label}</button>
+    </div>
+    <div class="picker">
+      <h3>Tops</h3><div class="items">${ITEMS.filter(i => i.cat === 'top').map(card).join('')}</div>
+      <h3>Trousers</h3><div class="items">${ITEMS.filter(i => i.cat === 'bottom').map(card).join('')}</div>
+      <p class="note">Tap an item again to take it off. Prices are placeholders.</p>
+    </div>
+  </div>`;
+}
+function enteredView() {
+  return `<div class="panel" style="justify-items:center;text-align:center;padding:28px 16px">
+    ${figure(S.entry.sel, true)}
+    <h2 style="font-size:26px">Your look is entered</h2>
+    <p class="note" style="max-width:44ch">Other players are voting now. Your star rating appears when the challenge ends in ${CHALLENGE.ends}.</p>
+    <div class="row-btns" style="justify-content:center"><button class="btn" data-act="tab" data-id="vote">Vote to earn tags</button><button class="btn ghost" data-act="tab" data-id="looks">See my looks</button></div></div>
+  ${shopPanel(S.entry.sel)}`;
+}
+
+/* ---------- Vote tab ---------- */
+function newMatch() {
+  const pool = shuffle(combos().filter(c => LOOKS[c.top + '|' + c.bottom] && totalOf(c) <= CHALLENGE.budget));
+  const names = shuffle(HANDLES.slice());
+  V.match = { a: { sel: pool[0], by: names[0], r: starsFor(pool[0]) }, b: { sel: pool[1], by: names[1], r: starsFor(pool[1]) } };
+  V.picked = null;
+}
+function voteView() {
+  if (!V.match) newMatch();
+  const m = V.match, done = S.votes % RULES.votesPerReward;
+  const side = (look, key) => {
+    const inner = `${figure(look.sel, true)}<span class="who"><b>Look ${key.toUpperCase()}</b> · ${look.by} · ${money(totalOf(look.sel))}</span>
+      ${V.picked ? `<span class="rating"><b class="num">${look.r.toFixed(1)}</b>${starRow(look.r)}<span class="note">Current rating</span></span>` : ''}`;
+    return V.picked ? `<div class="look ${V.picked === key ? 'picked' : ''}">${inner}</div>` : `<button class="look" data-act="vote" data-id="${key}">${inner}</button>`;
+  };
+  return `<div style="display:grid;gap:6px"><h1 style="font-size:28px">Vote</h1>
+    <p class="note">Pick the look that works better for the brief. Every ${RULES.votesPerReward} votes earn ${RULES.voteReward} tags.</p></div>
+  <div class="panel" style="gap:8px"><div class="row"><span style="font-weight:600">${done} of ${RULES.votesPerReward} votes</span><span class="note">Next reward: +${RULES.voteReward} ${TAG_SVG}</span></div>
+    <div class="meter tagm"><i style="width:${done / RULES.votesPerReward * 100}%"></i></div>
+    ${S.held ? `<span class="note">${S.held} earned tags are waiting. Your tags are full, so they'll be added when you spend some.</span>` : ''}</div>
+  <div class="filters"><button class="fchip" aria-pressed="true">${CHALLENGE.title}</button>${COMING.map(c => `<button class="fchip" disabled>${c.title.split(' ').slice(0, 2).join(' ')} · soon</button>`).join('')}</div>
+  <div class="panel" style="gap:10px"><span class="note"><b style="color:var(--ink)">Brief:</b> ${CHALLENGE.client}, ${CHALLENGE.frame}. ${CHALLENGE.goal}. ${CHALLENGE.occasion}. Budget $${CHALLENGE.budget}.</span>
+    <div class="pair">${side(m.a, 'a')}${side(m.b, 'b')}</div>
+    ${V.picked ? `<p class="note" style="text-align:center">Ratings may change before the challenge ends.</p><button class="btn" data-act="nextmatch">Next matchup</button>` : '<p class="note" style="text-align:center">Tap the look you think works better.</p>'}</div>`;
+}
+
+/* ---------- My looks tab ---------- */
+function looksView() {
+  const e = S.entry;
+  if (!e) return `<h1 style="font-size:28px">My looks</h1><div class="panel empty"><h3>No looks yet</h3><p class="note">Enter a challenge and your looks will appear here with their ratings.</p><button class="btn" data-act="tab" data-id="challenges">See challenges</button></div>${demoTools()}`;
+  const items = [BY[e.sel.top], BY[e.sel.bottom]];
+  if (!e.revealed) return `<h1 style="font-size:28px">My looks</h1>
+    <div class="entry"><div class="panel">${figure(e.sel)}</div>
+      <div class="panel"><span class="pill" style="justify-self:start">${CHALLENGE.title}</span>
+        <span class="note">Players are voting on your look</span><span class="clock num">Results in ${CHALLENGE.ends}</span>
+        <p class="note">Your star rating appears when the challenge ends. You'll get a notification.</p>
+        <div class="row-btns"><button class="btn ghost" data-act="open">Restyle entry</button><button class="btn" data-act="reveal">Skip ahead (demo)</button></div></div>
+      <div style="grid-column:1/-1">${shopPanel(e.sel)}</div></div>${demoTools()}`;
+  const R = e.result;
+  return `<h1 style="font-size:28px">My looks</h1>
+    <div class="entry"><div class="panel">${figure(e.sel)}</div>
+      <div style="display:grid;gap:14px;min-width:0">
+        <div class="panel"><span class="pill" style="justify-self:start">${CHALLENGE.title} · ended</span>
+          <div class="row" style="justify-content:flex-start;gap:14px;align-items:center"><span class="big num">${R.stars.toFixed(1)}</span>${starRow(R.stars, 'big-stars')}</div>
+          <p class="note">From ${R.votes} player votes</p>
+          <div class="row"><span>${R.label}</span><b class="num">+${R.prize} coins</b></div></div>
+        <div class="panel"><h3 style="font-size:18px">What voters said</h3><ul class="fb">${items.map(i => `<li><b>${i.name}:</b> ${i.why}</li>`).join('')}</ul></div>
+        ${shopPanel(e.sel)}
+      </div></div>${demoTools()}`;
+}
+function shopPanel(sel) {
+  const items = [BY[sel.top], BY[sel.bottom]];
+  return `<div class="panel"><div class="row" style="align-items:baseline"><h3 style="font-size:18px">Shop this look</h3><b class="num">${money(totalOf(sel))}</b></div>
+    <div class="shop">${items.map(i => `<a href="${i.url}" target="_blank" rel="noopener noreferrer"><img src="${i.img}" alt=""><span><span class="sname">${i.name}</span><br><span class="ssub">${money(i.price)} · ${money(i.price / i.wears)} per wear</span></span><span class="ssub">Buy on Amazon ↗</span></a>`).join('')}</div></div>`;
+}
+function demoTools() {
+  return `<p class="note">Demo tools: <button class="link" data-act="nextday">Simulate next day</button> · <button class="link" data-act="reset">Reset mockup</button></p>`;
+}
+
+/* ---------- Sheets ---------- */
+function checkinSheet() {
+  const full = S.tags >= RULES.cap, day = (S.streak % 7);
+  return `<div class="sheet-bg"><div class="sheet" role="dialog" aria-label="Daily check-in">
+    <span class="pill" style="justify-self:start">Daily check-in</span><h3>+${RULES.checkin} tags for today</h3>
+    <div class="streak">${Array.from({ length: 7 }, (_, i) => `<span class="${i < day ? 'done' : i === day ? 'today' : ''}">Day ${i + 1}</span>`).join('')}</div>
+    <p class="note">${full ? `You're full (${S.tags} / ${RULES.cap}). Spend some tags on a challenge to collect today's.` : `You have ${S.tags} / ${RULES.cap}. You can hold up to ${RULES.cap}.`}</p>
+    <button class="btn" data-act="collect" ${full ? 'disabled' : ''}>Collect ${RULES.checkin} tags</button>
+    <button class="btn ghost" data-act="close">${full ? 'OK' : 'Later'}</button></div></div>`;
+}
+function storeSheet() {
+  return `<div class="sheet-bg" data-act="close"><div class="sheet" role="dialog" aria-label="Store">
+    <h3>Store</h3><p class="note">Mockup only. No payment is taken. Bought tags can go above the ${RULES.cap} limit.</p>
+    <button class="pack" data-act="buy" data-id="tags10"><span><b>10 tags</b><br><span>Two entries</span></span><span class="price-tag">$0.99</span></button>
+    <button class="pack" data-act="buy" data-id="tags30"><span><b>30 tags</b><br><span>Six entries, best value</span></span><span class="price-tag">$1.99</span></button>
+    <button class="pack" data-act="buy" data-id="coins"><span><b>150 coins</b><br><span>Styling budget</span></span><span class="price-tag">$4.99</span></button>
+    <button class="btn ghost" data-act="close">Close</button></div></div>`;
+}
+
+/* ---------- Render + events ---------- */
+const app = document.getElementById('app');
+function render() {
+  let main = '';
+  if (V.tab === 'challenges') main = V.sub === 'style' ? styleView() : V.sub === 'entered' ? enteredView() : listView();
+  if (V.tab === 'vote') main = voteView();
+  if (V.tab === 'looks') { main = looksView(); if (S.entry && S.entry.revealed) { S.entry.seen = true; save(); } }
+  app.innerHTML = header() + main;
+  document.getElementById('tabbar').innerHTML = tabbar();
+  document.getElementById('sheet').innerHTML = V.sheet === 'checkin' ? checkinSheet() : V.sheet === 'store' ? storeSheet() : '';
+}
+function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 2800); }
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const act = el.dataset.act, id = el.dataset.id;
+  if (act === 'close') { if (e.target !== el && el.classList.contains('sheet-bg')) return; V.sheet = null; }
+  if (act === 'store') V.sheet = 'store';
+  if (act === 'buy') {
+    if (id === 'tags10') { addTags(10, true); toast('Added 10 tags (mockup, no payment taken)'); }
+    if (id === 'tags30') { addTags(30, true); toast('Added 30 tags (mockup, no payment taken)'); }
+    if (id === 'coins') { S.coins += 150; toast('Added 150 coins (mockup, no payment taken)'); }
+    V.sheet = null; save();
+  }
+  if (act === 'collect') { const got = addTags(RULES.checkin, false); S.last = today(); S.streak++; save(); V.sheet = null; toast(`Collected ${got} tags`); }
+  if (act === 'tab') { V.tab = id; V.sub = 'list'; }
+  if (act === 'list') V.sub = 'list';
+  if (act === 'open') { V.tab = 'challenges'; V.sub = 'style'; V.sel = S.entry ? { ...S.entry.sel } : {}; }
+  if (act === 'pick') { const it = BY[id]; V.sel[it.cat] = V.sel[it.cat] === id ? null : id; }
+  if (act === 'submit') {
+    if (!S.entry) { S.tags -= RULES.entry; collectHeld(); toast(`Entered. ${RULES.entry} tags spent.`); }
+    else toast('Entry updated');
+    S.entry = { sel: { ...V.sel }, revealed: false, result: null, seen: false };
+    V.sub = 'entered'; save();
+  }
+  if (act === 'vote') {
+    V.picked = id; S.votes++;
+    if (S.votes % RULES.votesPerReward === 0) {
+      const got = addTags(RULES.voteReward, false); S.held += RULES.voteReward - got;
+      toast(got ? `+${got} tags for voting` : `Tags full. ${RULES.voteReward} tags are waiting for you.`);
+    }
+    save();
+  }
+  if (act === 'nextmatch') newMatch();
+  if (act === 'reveal' && S.entry) {
+    const stars = starsFor(S.entry.sel), votes = 60 + Math.floor(Math.random() * 90);
+    const prize = stars >= 4 ? CHALLENGE.prize : stars >= 3 ? Math.round(CHALLENGE.prize / 2) : 10;
+    const label = stars >= 4 ? 'Top prize: 4 stars or more' : stars >= 3 ? 'Runner-up prize: 3 stars or more' : 'Thanks for entering';
+    S.coins += prize; S.entry.revealed = true; S.entry.result = { stars, votes, prize, label }; save();
+  }
+  if (act === 'nextday') { S.last = null; S.entry = null; save(); V.sheet = 'checkin'; V.tab = 'challenges'; V.sub = 'list'; toast('A new day. New challenge round.'); }
+  if (act === 'reset') { S = fresh(); save(); V = { tab: 'challenges', sub: 'list', sel: {}, match: null, picked: null, sheet: 'checkin' }; }
+  render();
+  if (['tab', 'open', 'submit', 'list'].includes(act)) scrollTo({ top: 0 });
+});
+if (S.last !== today()) V.sheet = 'checkin';
+render();
+})();
+</script>
+</body>
+</html>

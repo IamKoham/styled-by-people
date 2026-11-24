@@ -1,0 +1,586 @@
+<title>Styled by People</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a consulting report — numbered exhibits down a single 960px column, each section opens with its takeaway as the headline. */
+:root {
+  --bg: #fafafc;
+  --surface: #ffffff;
+  --ink: #15162a;
+  --ink-2: #4c4e63;
+  --ink-3: #74768b;
+  --rule: #e3e3ec;
+  --tint: #f1f0f7;
+  --accent: #7a2a63;          /* plum: page accent, headlines and the concept */
+  --accent-soft: #f5e9f1;
+  --s1: #2a78d6;              /* chart series 1 */
+  --s2: #eb6834;              /* chart series 2 */
+  --band: #eceaf4;
+  --good: #1a7f4b;
+  --warn: #a86400;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121320; --surface: #1a1b2a; --ink: #eeeef5; --ink-2: #c0c1d2; --ink-3: #9a9cb1;
+    --rule: #2d2e42; --tint: #212236; --accent: #e08ac4; --accent-soft: #33203a;
+    --s1: #3987e5; --s2: #d95926; --band: #262842; --good: #4fc488; --warn: #e0a040;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121320; --surface: #1a1b2a; --ink: #eeeef5; --ink-2: #c0c1d2; --ink-3: #9a9cb1;
+  --rule: #2d2e42; --tint: #212236; --accent: #e08ac4; --accent-soft: #33203a;
+  --s1: #3987e5; --s2: #d95926; --band: #262842; --good: #4fc488; --warn: #e0a040;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 980px; margin: 0 auto; padding-block: 40px 80px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.muted { color: var(--ink-2); }
+.small { font-size: 13px; color: var(--ink-3); }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Cover */
+.cover { display: grid; gap: 28px; padding-bottom: 40px; border-bottom: 1px solid var(--rule); }
+.cover h1 { font-size: clamp(40px, 7vw, 72px); font-weight: 800; letter-spacing: -.02em; }
+.cover h1 em { font-style: normal; color: var(--accent); }
+.cover .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--ink-2); max-width: 60ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 24px; font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+
+/* Hero stats */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.stat { background: var(--surface); padding: 20px 18px; display: grid; gap: 6px; align-content: start; }
+.stat b { font-family: var(--display); font-size: 40px; font-weight: 800; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 14px; color: var(--ink-2); line-height: 1.4; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Sections */
+section { padding-block: 56px 8px; display: grid; gap: 22px; }
+section > h2 { font-size: clamp(26px, 3.6vw, 36px); font-weight: 700; letter-spacing: -.01em; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 760px) { .two { grid-template-columns: 1fr; } }
+.two > * { min-width: 0; }
+
+/* Exec summary */
+.summary { display: grid; gap: 0; border-top: 2px solid var(--ink); }
+.summary li { list-style: none; display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.summary li strong { font-family: var(--display); font-size: 17px; }
+.summary ul { margin: 0; padding: 0; }
+@media (max-width: 600px) { .summary li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* Exhibits */
+.exhibit { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 22px 22px 16px; display: grid; gap: 14px; min-width: 0; }
+.ex-head { display: grid; gap: 4px; }
+.ex-label { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.ex-title { font-family: var(--display); font-size: 19px; font-weight: 700; }
+.source { font-size: 12px; color: var(--ink-3); border-top: 1px solid var(--rule); padding-top: 10px; }
+.source a { color: inherit; }
+
+/* Bar charts (HTML, drawn to a single linear scale per chart) */
+.bars { display: grid; gap: 10px; }
+.bar-row { display: grid; grid-template-columns: 128px minmax(0, 1fr) 64px; align-items: center; gap: 12px; }
+.bar-row .lbl { font-size: 14px; color: var(--ink-2); }
+.bar-row .val { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.track { position: relative; height: 22px; border-radius: 4px; }
+.track::before { content: ""; position: absolute; inset: 0; border-left: 1px solid var(--rule); }
+.fill { position: absolute; top: 0; bottom: 0; left: 0; background: var(--s1); border-radius: 0 4px 4px 0; outline: none; }
+.fill.alt { background: var(--s2); }
+.fill:focus-visible, .range:focus-visible, .dot:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.range { position: absolute; top: 0; bottom: 0; background: var(--s1); border-radius: 4px; min-width: 6px; }
+.range.alt { background: var(--s2); }
+.axis { display: grid; grid-template-columns: 128px minmax(0, 1fr) 64px; gap: 12px; }
+.axis .ticks { position: relative; height: 18px; font-size: 11px; color: var(--ink-3); font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.axis .ticks span { position: absolute; transform: translateX(-50%); }
+.axis .ticks span:first-child { transform: none; }
+.axis .ticks span:last-child { transform: translateX(-100%); }
+@media (max-width: 520px) {
+  .bar-row, .axis { grid-template-columns: 92px minmax(0, 1fr) 56px; gap: 8px; }
+  .bar-row .lbl { font-size: 13px; }
+}
+
+/* Grouped bars */
+.group { display: grid; gap: 4px; padding-block: 6px; border-bottom: 1px solid var(--rule); }
+.group:last-child { border-bottom: 0; }
+.group .bar-row { grid-template-columns: 128px minmax(0, 1fr) 64px; }
+.group .track { height: 16px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13px; color: var(--ink-2); }
+.key { display: inline-flex; align-items: center; gap: 8px; }
+.sw { width: 12px; height: 12px; border-radius: 3px; background: var(--s1); }
+.sw.alt { background: var(--s2); }
+.sw.band { background: var(--band); border: 1px dashed var(--ink-3); }
+
+/* Scenario chart */
+.ref-band { position: absolute; top: -6px; bottom: -6px; background: var(--band); border-left: 1px dashed var(--ink-3); border-right: 1px dashed var(--ink-3); }
+
+/* Loop diagram */
+.loop { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; counter-reset: step; }
+.step { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 14px; display: grid; gap: 6px; align-content: start; position: relative; }
+.step::before { counter-increment: step; content: counter(step); font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.step h3 { font-size: 17px; }
+.step p { font-size: 14px; color: var(--ink-2); }
+.step:not(:last-child)::after { content: "→"; position: absolute; right: -10px; top: 50%; transform: translate(50%, -50%); color: var(--ink-3); font-size: 16px; z-index: 1; background: var(--bg); line-height: 1; padding: 2px 0; }
+@media (max-width: 820px) {
+  .loop { grid-template-columns: 1fr; }
+  .step:not(:last-child)::after { content: "↓"; right: 50%; top: auto; bottom: -10px; transform: translate(50%, 50%); }
+}
+
+/* Feature pills */
+.features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.feature { padding: 16px 0 0; border-top: 2px solid var(--accent); display: grid; gap: 6px; align-content: start; }
+.feature h3 { font-size: 17px; }
+.feature p { font-size: 14px; color: var(--ink-2); }
+@media (max-width: 760px) { .features { grid-template-columns: 1fr; } }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px; }
+th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+thead th { font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; background: var(--tint); }
+tbody tr:last-child td { border-bottom: 0; }
+td.c { text-align: center; }
+tr.us td { background: var(--accent-soft); font-weight: 600; }
+.yes { color: var(--good); font-weight: 700; }
+.part { color: var(--warn); font-weight: 600; }
+.no { color: var(--ink-3); }
+
+/* Positioning map */
+.map svg { width: 100%; height: auto; display: block; }
+.map text { font-family: var(--body); }
+
+/* Roadmap */
+.phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.phase { background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; padding: 18px; display: grid; gap: 10px; align-content: start; }
+.phase.now { border-color: var(--accent); box-shadow: inset 0 3px 0 var(--accent); }
+.phase .when { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+.phase h3 { font-size: 19px; }
+.phase ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); display: grid; gap: 4px; }
+.gate { font-size: 13px; background: var(--tint); border-radius: 6px; padding: 10px 12px; }
+.gate b { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 2px; }
+@media (max-width: 820px) { .phases { grid-template-columns: 1fr; } }
+
+/* Ask */
+.ask { background: var(--accent); color: var(--bg); border-radius: 12px; padding: 32px 28px; display: grid; gap: 20px; }
+.ask h2 { font-size: clamp(26px, 3.6vw, 34px); }
+.ask .eyebrow { color: var(--bg); opacity: .8; }
+.ask-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.ask-grid div { border-top: 1px solid color-mix(in srgb, var(--bg) 45%, transparent); padding-top: 12px; display: grid; gap: 4px; }
+.ask-grid b { font-family: var(--display); font-size: 18px; }
+.ask-grid span { font-size: 14px; opacity: .9; }
+@media (max-width: 760px) { .ask-grid { grid-template-columns: 1fr; } }
+
+.why { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 28px; }
+.why div { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.why b { font-family: var(--display); font-size: 17px; }
+.why span { font-size: 14px; color: var(--ink-2); }
+@media (max-width: 760px) { .why { grid-template-columns: 1fr; } }
+
+footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--rule); display: grid; gap: 10px; font-size: 13px; color: var(--ink-3); }
+footer p { max-width: none; }
+
+/* Tooltip */
+#tip { position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 13px; line-height: 1.4; padding: 8px 10px; border-radius: 6px; max-width: 260px; }
+@media (prefers-reduced-motion: no-preference) { .fill, .range { transition: filter .15s; } }
+.fill:hover, .range:hover, .dot:hover { filter: brightness(1.1); }
+</style>
+
+<div class="wrap">
+
+  <header class="cover">
+    <div class="eyebrow">Investment case · Concept stage · November 2026</div>
+    <h1>AI can style you. <em>Only people can tell you it works.</em></h1>
+    <p class="lede">A styling game where players dress real outfits from affordable brands at real prices, for real-life briefs, and other players vote on the best look. Every look can be saved and shopped.</p>
+    <div class="meta"><span>Working name: Styled by People</span><span>Market: US, women 18–30 first</span><span>Stage: pre-build, research complete</span></div>
+  </header>
+
+  <section aria-labelledby="h-summary">
+    <div class="eyebrow">Executive summary</div>
+    <h2 id="h-summary">There is a large unmet need and an open lane, and it can be tested for under $20K</h2>
+    <div class="stats">
+      <div class="stat"><b class="num">94%</b><span>of Gen Z report the "nothing to wear" feeling</span></div>
+      <div class="stat"><b class="num">2%</b><span>of young Americans trust AI for fashion advice, while 85% use AI</span></div>
+      <div class="stat"><b class="num">58%</b><span>of US shoppers have bought a dupe; clothing is the top category</span></div>
+      <div class="stat"><b class="num">0</b><span>live games combine real affordable clothes, real prices, real-life briefs and player voting</span></div>
+    </div>
+    <ul class="summary">
+      <li><strong>The need</strong><span>Young people want help putting outfits together for their body, budget and occasion. Paid styling costs $75–$350 an hour and is shrinking. Free tools give ideas but not a trusted verdict.</span></li>
+      <li><strong>The product</strong><span>Daily and weekly styling challenges built on real clothes at real prices. Players vote head-to-head, so the judgment comes from people, which AI apps don't offer.</span></li>
+      <li><strong>The lane</strong><span>Covet Fashion is in decline, Drest moved to luxury sponsorships, and Dress to Impress uses fantasy items. Funded AI stylists compete on generating looks, not judging them.</span></li>
+      <li><strong>The size</strong><span>About 3.5M likely styling-game players among US women 18–34, worth an estimated $21–189M a year. A realistic three-year goal of 100–250K engaged players is a $0.6–13.5M business before brand deals.</span></li>
+      <li><strong>The business</strong><span>In-app purchases lead (an estimated $0.50–$4.50 per engaged player each month), with brand-sponsored challenges second and shopping links as proof for brands.</span></li>
+      <li><strong>The plan</strong><span>Prove demand with a TikTok challenge account, then a mobile web prototype. Build the full app only once players return at top-10% rates.</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-trust">
+    <div class="eyebrow">The problem</div>
+    <h2 id="h-trust">Gen Z uses AI every day but does not trust it to judge an outfit</h2>
+    <div class="two">
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 1</span><span class="ex-title">Who young Americans trust for fashion advice</span><span class="small">Share of respondents aged 11–24 (n = 6,126), 2026</span></div>
+        <div class="bars" role="img" aria-label="Friends 34 percent, family 27 percent, influencers 10.8 percent, AI 2 percent">
+          <div class="bar-row"><span class="lbl">Friends</span><div class="track"><div class="fill" style="width:85%" tabindex="0" data-tip="Friends: 34% trust them for fashion advice"></div></div><span class="val">34%</span></div>
+          <div class="bar-row"><span class="lbl">Family</span><div class="track"><div class="fill" style="width:67.5%" tabindex="0" data-tip="Family: 27%"></div></div><span class="val">27%</span></div>
+          <div class="bar-row"><span class="lbl">Influencers</span><div class="track"><div class="fill" style="width:27%" tabindex="0" data-tip="Influencers: 10.8%"></div></div><span class="val">10.8%</span></div>
+          <div class="bar-row"><span class="lbl">AI</span><div class="track"><div class="fill alt" style="width:5%" tabindex="0" data-tip="AI: 2% trust it for fashion advice, although 85% use AI"></div></div><span class="val">2%</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">0%</span><span style="left:50%">20%</span><span style="left:100%">40%</span></div><span></span></div>
+        <div class="source">Source: Pacsun / GlobalData 2026 Youth Report, via <a href="https://retailboss.co/pacsun-youth-report-finds-a-gap-between-ai-use-and-fashion-trust/">RetailBoss</a>.</div>
+      </figure>
+      <div style="display:grid; gap:16px; align-content:start">
+        <p>The AI styling race is well funded. Alta raised $20M in October 2026 and has generated 700M outfits. Daydream raised a $50M seed. Google, Amazon, OpenAI and Pinterest all have AI shopping tools.</p>
+        <p>All of them generate looks. None lets real people judge them. Yet the people Gen Z trusts most are people: friends at 34% and family at 27%, against 2% for AI.</p>
+        <p><strong>The gap is a trusted human verdict.</strong> Player voting fills it, and every look on the platform is made by a person, which makes it a library of human-approved outfits anyone can save and shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-need">
+    <div class="eyebrow">The need</div>
+    <h2 id="h-need">Styling help is a mass need, and the paid options are priced for a few</h2>
+    <div class="two">
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 2</span><span class="ex-title">What styling help costs today</span><span class="small">US prices, in dollars per unit shown</span></div>
+        <div class="bars" role="img" aria-label="Personal stylist 75 to 350 dollars per hour; personal shopper 120 to 200 dollars per hour; Stitch Fix 20 dollars per box; this game free to play with packs from 4.99 dollars">
+          <div class="bar-row"><span class="lbl">Personal stylist <span class="small">/ hour</span></span><div class="track"><div class="range" style="left:21.4%; width:78.6%" tabindex="0" data-tip="Independent personal stylist: $75–$350+ per hour"></div></div><span class="val">$75–350</span></div>
+          <div class="bar-row"><span class="lbl">Personal shopper <span class="small">/ hour</span></span><div class="track"><div class="range" style="left:34.3%; width:22.9%" tabindex="0" data-tip="Personal shopper, Thumbtack US average: $120–$200 per hour"></div></div><span class="val">$120–200</span></div>
+          <div class="bar-row"><span class="lbl">Stitch Fix <span class="small">/ box</span></span><div class="track"><div class="range" style="left:5.7%; width:0; min-width:6px" tabindex="0" data-tip="Stitch Fix: $20 styling fee per box, credited to purchase"></div></div><span class="val">$20</span></div>
+          <div class="bar-row"><span class="lbl">This game</span><div class="track"><div class="range alt" style="left:0; width:2.9%" tabindex="0" data-tip="Free to play; optional packs from $4.99, passes $9.99"></div></div><span class="val">$0–10</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">$0</span><span style="left:28.6%">$100</span><span style="left:57.1%">$200</span><span style="left:100%">$350</span></div><span></span></div>
+        <div class="source">Sources: <a href="https://bookingagency.io/blog/wardrobe-styling-rates-pricing-guide-2025">BookingAgency.io</a>, <a href="https://www.thumbtack.com/k/personal-shoppers/">Thumbtack</a>, <a href="https://www.retaildive.com/news/what-trunk-clubs-demise-says-about-apparel-subscriptions/624667/">Retail Dive</a>. Game pricing is the proposed ladder.</div>
+      </figure>
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 3</span><span class="ex-title">Signals of demand</span><span class="small">Latest available figures</span></div>
+        <div class="table-wrap" style="border:0">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="num"><b>94%</b></td><td>of Gen Z look for advice on what to wear to work, against 61% of boomers</td></tr>
+              <tr><td class="num"><b>~1.5M</b></td><td>US searches a month for "outfit" (estimate)</td></tr>
+              <tr><td class="num"><b>12.3M</b></td><td>members across the two largest fashion-advice communities on Reddit</td></tr>
+              <tr><td class="num"><b>10.4B</b></td><td>visits to Dress to Impress, a styling-and-voting game on Roblox</td></tr>
+              <tr><td class="num"><b>82%</b></td><td>of Gen Z plan to buy cheaper alternatives (PwC; unverified)</td></tr>
+              <tr><td class="num"><b>−1.4%</b></td><td>Stitch Fix active clients in FY2026, now about 2.28M</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="source">Sources: <a href="https://fortune.com/2025/07/24/gen-z-workplace-outfits-anxiety-layoffs-millennials-pandemic-fashion-boomer-bosses-advice-office-wfh/">Fortune / IWG</a>, <a href="https://www.rankhero.com/keywords/outfit">RankHero</a>, <a href="https://thehiveindex.com/topics/fashion/platform/reddit/">Hive Index</a>, <a href="https://rowatcher.com/news/dress-to-impress-how-a-teen-developer-s-fashion-game-hit-9-7-billion-visits">RoWatcher</a>, <a href="https://pwc.com/us/en/industries/consumer-markets/library/gen-z-consumer-trends.html">PwC</a>, <a href="https://www.sec.gov/Archives/edgar/data/0001576942/000162828026063365/sfix-20260801.htm">Stitch Fix 10-K</a>.</div>
+      </figure>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-product">
+    <div class="eyebrow">The product</div>
+    <h2 id="h-product">A daily styling challenge with real clothes, real prices and real judges</h2>
+    <div class="loop">
+      <div class="step"><h3>Get a brief</h3><p>"First job interview, wants to look taller, $150 budget." Daily, weekly and seasonal briefs.</p></div>
+      <div class="step"><h3>Style it</h3><p>Dress the model from real affordable brands. A $45 top costs 45 coins.</p></div>
+      <div class="step"><h3>Submit</h3><p>Every submission earns coins, so players can keep playing for free.</p></div>
+      <div class="step"><h3>Get voted on</h3><p>Other players vote head-to-head. Winners earn prizes, rank and brand unlocks.</p></div>
+      <div class="step"><h3>Save and shop</h3><p>Any look can be saved, and every item links to the real product.</p></div>
+    </div>
+    <div class="features">
+      <div class="feature"><h3>Briefs built on real bodies</h3><p>The client's height, shape and goals are part of the challenge. Players learn the most useful real-world styling skill without it being about their own body.</p></div>
+      <div class="feature"><h3>Teaches money sense</h3><p>Real prices and limited wears per item teach budgeting and cost per wear. A $60 pair of jeans worn 20 times beats a $25 top worn twice.</p></div>
+      <div class="feature"><h3>Fair by design</h3><p>No paid vote boosts, ever. Head-to-head pairs, more weight for trusted voters and no downvotes address the genre's top complaint.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-comp">
+    <div class="eyebrow">Competitive landscape</div>
+    <h2 id="h-comp">No one combines real affordable clothes with human judging</h2>
+    <figure class="exhibit map" style="margin:0">
+      <div class="ex-head"><span class="ex-label">Exhibit 4</span><span class="ex-title">Where styling products sit</span><span class="small">Qualitative positioning based on the landscape research</span></div>
+      <svg viewBox="0 0 720 420" role="img" aria-label="Positioning map. Horizontal axis: how real and buyable the clothes are. Vertical axis: how much people judge the looks. The concept sits alone in the top right.">
+        <rect x="80" y="20" width="620" height="340" fill="var(--tint)" rx="8"></rect>
+        <line x1="390" y1="20" x2="390" y2="360" stroke="var(--rule)" stroke-width="1.5"></line>
+        <line x1="80" y1="190" x2="700" y2="190" stroke="var(--rule)" stroke-width="1.5"></line>
+        <text x="390" y="395" text-anchor="middle" font-size="13" fill="var(--ink-2)">Clothes: fantasy items  →  real, affordable, shoppable</text>
+        <text x="30" y="190" text-anchor="middle" font-size="13" fill="var(--ink-2)" transform="rotate(-90 30 190)">Judging: none  →  human voting</text>
+        <text x="94" y="42" font-size="11" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">PLAY, NOT SHOPPING</text>
+        <text x="686" y="346" text-anchor="end" font-size="11" fill="var(--ink-3)" font-family="IBM Plex Mono, monospace">SHOPPING, NO VERDICT</text>
+        <g class="dot" tabindex="0" data-tip="Dress to Impress (Roblox): star voting by players, fantasy items, no real prices">
+          <circle cx="150" cy="70" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="166" y="75" font-size="14" fill="var(--ink)">Dress to Impress</text></g>
+        <g class="dot" tabindex="0" data-tip="Covet Fashion (EA): real contemporary brands at premium prices, player voting; in decline">
+          <circle cx="430" cy="110" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="446" y="115" font-size="14" fill="var(--ink)">Covet Fashion</text></g>
+        <g class="dot" tabindex="0" data-tip="Drest: real luxury brands most players can't afford; leaderboards">
+          <circle cx="380" cy="165" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="364" y="170" text-anchor="end" font-size="14" fill="var(--ink)">Drest</text></g>
+        <g class="dot" tabindex="0" data-tip="Infinity Nikki: high-budget fantasy dress-up, no voting">
+          <circle cx="130" cy="320" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="146" y="325" font-size="14" fill="var(--ink)">Infinity Nikki</text></g>
+        <g class="dot" tabindex="0" data-tip="Pinterest Shuffles: collage remixing with real products, no competitive judging">
+          <circle cx="520" cy="270" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="536" y="275" font-size="14" fill="var(--ink)">Pinterest Shuffles</text></g>
+        <g class="dot" tabindex="0" data-tip="AI stylists (Alta, Daydream, Whering): generate looks and shop, no human judging">
+          <circle cx="600" cy="318" r="9" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"></circle>
+          <text x="584" y="323" text-anchor="end" font-size="14" fill="var(--ink)">AI stylists</text></g>
+        <g class="dot" tabindex="0" data-tip="This concept: real affordable items at real prices, judged by players">
+          <circle cx="640" cy="56" r="13" fill="var(--accent)" stroke="var(--surface)" stroke-width="3"></circle>
+          <text x="620" y="61" text-anchor="end" font-size="15" font-weight="700" fill="var(--accent)">This concept</text></g>
+      </svg>
+      <div class="source">Placement is a judgment call drawn from the competitor research, not measured data.</div>
+    </figure>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Product</th><th>Real affordable items</th><th>Real prices</th><th>Real-life briefs</th><th>Human voting</th><th>Shoppable</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Covet Fashion</td><td class="c part">Premium</td><td class="c part">Budget caps</td><td class="c part">Occasions</td><td class="c yes">Yes</td><td class="c part">Partly</td><td>Declining; US revenue ~$8–12M a year (est.)</td></tr>
+          <tr><td>Drest</td><td class="c no">Luxury</td><td class="c no">No</td><td class="c part">Luxury news</td><td class="c part">Leaderboards</td><td class="c part">Moved away</td><td>Shifted to brand sponsorships</td></tr>
+          <tr><td>Dress to Impress</td><td class="c no">Fantasy</td><td class="c no">No</td><td class="c no">Fun themes</td><td class="c yes">Yes</td><td class="c no">No</td><td>Viral, but spite-voting complaints</td></tr>
+          <tr><td>AI stylists</td><td class="c yes">Yes</td><td class="c yes">Yes</td><td class="c part">Prompts</td><td class="c no">No</td><td class="c yes">Yes</td><td>Well funded; Alta pivoting to retailers</td></tr>
+          <tr class="us"><td>This concept</td><td class="c yes">Yes</td><td class="c yes">1:1</td><td class="c yes">Body + budget</td><td class="c yes">Yes</td><td class="c yes">Yes</td><td>Pre-build</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-aud">
+    <div class="eyebrow">The audience</div>
+    <h2 id="h-aud">Young women who put price first and still care about design</h2>
+    <div class="two">
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 5</span><span class="ex-title">What matters when choosing clothes</span><span class="small">Share of US respondents, March 2026</span></div>
+        <div class="legend"><span class="key"><span class="sw"></span>Gen Z</span><span class="key"><span class="sw alt"></span>All US adults</span></div>
+        <div class="bars" role="img" aria-label="Price: Gen Z 66, all adults 69. Browsing in stores: 51 vs 42. Design: 41 vs 33. Fashionable: 26 vs 19.">
+          <div class="group">
+            <div class="bar-row"><span class="lbl">Price</span><div class="track"><div class="fill" style="width:94.3%" tabindex="0" data-tip="Price · Gen Z: 66%"></div></div><span class="val">66%</span></div>
+            <div class="bar-row"><span class="lbl"></span><div class="track"><div class="fill alt" style="width:98.6%" tabindex="0" data-tip="Price · All US adults: 69%"></div></div><span class="val muted">69%</span></div>
+          </div>
+          <div class="group">
+            <div class="bar-row"><span class="lbl">Browse in stores</span><div class="track"><div class="fill" style="width:72.9%" tabindex="0" data-tip="Browse in stores · Gen Z: 51%"></div></div><span class="val">51%</span></div>
+            <div class="bar-row"><span class="lbl"></span><div class="track"><div class="fill alt" style="width:60%" tabindex="0" data-tip="Browse in stores · All US adults: 42%"></div></div><span class="val muted">42%</span></div>
+          </div>
+          <div class="group">
+            <div class="bar-row"><span class="lbl">Design</span><div class="track"><div class="fill" style="width:58.6%" tabindex="0" data-tip="Design (color and style) · Gen Z: 41%"></div></div><span class="val">41%</span></div>
+            <div class="bar-row"><span class="lbl"></span><div class="track"><div class="fill alt" style="width:47.1%" tabindex="0" data-tip="Design · All US adults: 33%"></div></div><span class="val muted">33%</span></div>
+          </div>
+          <div class="group">
+            <div class="bar-row"><span class="lbl">Fashionable</span><div class="track"><div class="fill" style="width:37.1%" tabindex="0" data-tip="Fashionable · Gen Z: 26%"></div></div><span class="val">26%</span></div>
+            <div class="bar-row"><span class="lbl"></span><div class="track"><div class="fill alt" style="width:27.1%" tabindex="0" data-tip="Fashionable · All US adults: 19%"></div></div><span class="val muted">19%</span></div>
+          </div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">0%</span><span style="left:50%">35%</span><span style="left:100%">70%</span></div><span></span></div>
+        <div class="source">Source: <a href="https://yougov.com/en-us/articles/54192-gen-z-apparel-shopping-what-sets-the-younger-generation-apart-from-the-overall-population">YouGov, March 2026</a>.</div>
+      </figure>
+      <div class="table-wrap" style="align-self:start">
+        <table style="min-width:0">
+          <thead><tr><th>Segment</th><th>Why them</th></tr></thead>
+          <tbody>
+            <tr><td><b>Core</b><br><span class="small">US women 18–30</span></td><td>Price-first but design-minded. Styling-game players skew older than expected: Covet's average player was 29 and 95% female (2015).</td></tr>
+            <tr><td><b>Wedge</b><br><span class="small">18–24, first jobs</span></td><td>94% of Gen Z seek work-outfit advice, they're 3× as likely as boomers to feel outfit anxiety, and they have little money for a new wardrobe.</td></tr>
+            <tr><td><b>Spenders</b><br><span class="small">25–30</span></td><td>Higher spend per paying player. On Roblox, adults are 37% of US daily users and spend 50% more than teens.</td></tr>
+            <tr><td><b>Secondary</b><br><span class="small">Men</span></td><td>Over a third of Pinterest users and 6.5M on r/malefashionadvice, but only ~5% of Covet players. Reach them through menswear and gender-neutral briefs.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-size">
+    <div class="eyebrow">Market size</div>
+    <h2 id="h-size">3.5M likely players in the US alone, and a $0.6–13.5M business within reach</h2>
+    <div class="two">
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 6</span><span class="ex-title">From young women to target players</span><span class="small">US, millions of people</span></div>
+        <div class="bars" role="img" aria-label="38 million US women aged 18 to 34; 14 million play mobile games; 3.5 million likely styling-game players; 0.1 to 0.25 million target engaged players by year 3">
+          <div class="bar-row"><span class="lbl">Women 18–34 <span class="small">TAM</span></span><div class="track"><div class="fill" style="width:100%" tabindex="0" data-tip="~38M US women aged 18–34 (Census 2025 estimates, own split by sex)"></div></div><span class="val">38M</span></div>
+          <div class="bar-row"><span class="lbl">Play mobile games</span><div class="track"><div class="fill" style="width:36.8%" tabindex="0" data-tip="~14M: 46% of women play games (ESA 2026) × 80% choose mobile first"></div></div><span class="val">14M</span></div>
+          <div class="bar-row"><span class="lbl">Likely styling players <span class="small">SAM</span></span><div class="track"><div class="fill" style="width:9.2%" tabindex="0" data-tip="~3.5M: assumes 1 in 4 mobile-playing young women would play a styling game. Cross-check: Covet alone had ~2M monthly players in 2020"></div></div><span class="val">3.5M</span></div>
+          <div class="bar-row"><span class="lbl">Year-3 target <span class="small">SOM</span></span><div class="track"><div class="range alt" style="left:0.26%; width:0.4%" tabindex="0" data-tip="100K–250K engaged monthly players: 3–7% of likely styling players"></div></div><span class="val">0.1–0.25M</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">0</span><span style="left:52.6%">20M</span><span style="left:100%">38M</span></div><span></span></div>
+        <div class="source">Sources: <a href="https://www.census.gov/newsroom/press-releases/2026/vintage-2025-pop-estimates.html">US Census Vintage 2025</a> (age groups; split by sex is own estimate), <a href="https://www.theesa.com/wp-content/uploads/2026/06/2026-Essential-Facts-Booklet-05-27-26.pdf">ESA Essential Facts 2026</a>. The 1-in-4 and 3–7% shares are assumptions.</div>
+      </figure>
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 7</span><span class="ex-title">The same funnel in dollars</span><span class="small">US, per year</span></div>
+        <div class="table-wrap" style="border:0">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td><b>TAM</b><br><span class="small">US mobile game spending</span></td><td class="num"><b>$26.7B</b></td></tr>
+              <tr><td><b>SAM</b><br><span class="small">3.5M players × $0.50–4.50 a month</span></td><td class="num"><b>$21–189M</b></td></tr>
+              <tr><td><b>Cross-check</b><br><span class="small">What today's styling games earn: Covet, Dress to Impress, Love Nikki, Infinity Nikki (mobile, global)</span></td><td class="num"><b>~$130M</b></td></tr>
+              <tr><td><b>SOM</b><br><span class="small">100–250K players × $0.50–4.50 a month</span></td><td class="num"><b>$0.6–13.5M</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small">Not counted: the UK, Canada and Australia, men, brand-sponsored challenges, shopping commissions and trend data. Each adds upside on top of these figures.</p>
+        <div class="source">Sources: <a href="https://www.theesa.com/2025-u-s-consumer-spending-on-video-games-nears-pandemic-level-peak-at-60-7-billion-second-highest-on-record/">ESA / Circana / Sensor Tower</a> for US mobile spend. Cross-check sums third-party estimates: Covet ~$8–12M (Sensor Tower peaks), Dress to Impress ~$10–14M (tracker), Love Nikki ~$30M (blog estimate), Infinity Nikki ~$70M (AppMagic).</div>
+      </figure>
+    </div>
+    <p class="muted">The two lenses agree. Bottom-up, the likely players are worth $21–189M a year. Top-down, today's styling games already earn about $130M, mostly with fantasy items and no real-world shopping. Capturing 3–7% of the likely players puts the business at Covet's scale today.</p>
+  </section>
+
+  <section aria-labelledby="h-model">
+    <div class="eyebrow">Business model</div>
+    <h2 id="h-model">In-app purchases carry the business; shopping links prove value to brands</h2>
+    <div class="two">
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 8</span><span class="ex-title">Revenue per engaged player, per month</span><span class="small">Estimated range in dollars, by revenue stream</span></div>
+        <div class="bars" role="img" aria-label="In-app purchases 0.50 to 4.50 dollars; shopping links 0.01 to 0.11 dollars per engaged player per month">
+          <div class="bar-row"><span class="lbl">In-app purchases</span><div class="track"><div class="range" style="left:10%; width:80%" tabindex="0" data-tip="In-app purchases (plus light ads): $0.50–$4.50 per engaged player per month"></div></div><span class="val">$0.50–4.50</span></div>
+          <div class="bar-row"><span class="lbl">Shopping links</span><div class="track"><div class="range alt" style="left:0.2%; width:2%" tabindex="0" data-tip="Affiliate commissions: $0.01–$0.11 per engaged player per month"></div></div><span class="val">$0.01–0.11</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">$0</span><span style="left:50%">$2.50</span><span style="left:100%">$5</span></div><span></span></div>
+        <p class="small">Brand-sponsored challenges are lumpy: about $0 until ~100K monthly players, then perhaps $10K–50K per deal. Trend data for brands comes later, at scale.</p>
+        <div class="source">Estimates built from <a href="https://gamedevreports.substack.com/p/appsflyer-app-monetization-in-2026">AppsFlyer</a>, <a href="https://impact.com/affiliate/affiliate-marketing-benchmark/">impact.com</a> and commission-rate benchmarks. A real example backs the low affiliate figure: a French Connection dress in Covet drew 110,000+ clicks and $12,000 in sales (<a href="https://fortune.com/2015/09/09/covet-fashion-mobile-game/">Fortune</a>).</div>
+      </figure>
+      <figure class="exhibit" style="margin:0">
+        <div class="ex-head"><span class="ex-label">Exhibit 9</span><span class="ex-title">What the business could earn a year</span><span class="small">Illustrative in-app revenue, $M, by monthly engaged players</span></div>
+        <div class="legend"><span class="key"><span class="sw"></span>Revenue range</span><span class="key"><span class="sw band"></span>Covet Fashion today, US ($8–12M, est.)</span></div>
+        <div class="bars" role="img" aria-label="50 thousand players: 0.3 to 2.7 million dollars a year. 100 thousand: 0.6 to 5.4 million. 250 thousand: 1.5 to 13.5 million. Covet Fashion's estimated US revenue is 8 to 12 million.">
+          <div class="bar-row"><span class="lbl">50K players</span><div class="track"><div class="ref-band" style="left:57.1%; width:28.6%"></div><div class="range" style="left:2.1%; width:17.2%" tabindex="0" data-tip="50K engaged players × $0.50–$4.50 × 12 months = $0.3M–$2.7M a year"></div></div><span class="val">$0.3–2.7M</span></div>
+          <div class="bar-row"><span class="lbl">100K players</span><div class="track"><div class="ref-band" style="left:57.1%; width:28.6%"></div><div class="range" style="left:4.3%; width:34.3%" tabindex="0" data-tip="100K engaged players: $0.6M–$5.4M a year"></div></div><span class="val">$0.6–5.4M</span></div>
+          <div class="bar-row"><span class="lbl">250K players</span><div class="track"><div class="ref-band" style="left:57.1%; width:28.6%"></div><div class="range" style="left:10.7%; width:85.7%" tabindex="0" data-tip="250K engaged players: $1.5M–$13.5M a year"></div></div><span class="val">$1.5–13.5M</span></div>
+        </div>
+        <div class="axis" aria-hidden="true"><span></span><div class="ticks"><span style="left:0">$0</span><span style="left:35.7%">$5M</span><span style="left:71.4%">$10M</span><span style="left:100%">$14M</span></div><span></span></div>
+        <div class="source">Arithmetic: players × $0.50–$4.50 × 12 months; excludes brand deals and shopping links. Covet figure inferred from <a href="https://sensortower.com/blog/2025-q2-unified-top-5-fashion%20games-revenue-us-6011f531241bc16eb85bc2b8">Sensor Tower</a> weekly peaks.</div>
+      </figure>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Stream</th><th>What's sold</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><b>In-app purchases</b></td><td>Coin packs from $4.99 on web ($0.99 in app stores), a $4.99 monthly card, a $9.99 season pass, cosmetics</td><td>Main revenue. Same price ladder as Infinity Nikki and top-grossing games</td></tr>
+          <tr><td><b>Brand challenges</b></td><td>Sponsored briefs featuring a brand's new collection</td><td>Second line. Drest now earns mostly this way</td></tr>
+          <tr><td><b>Shopping links</b></td><td>Commissions of 7–20% when players buy the real items</td><td>Small revenue, but the click data proves value to brands</td></tr>
+          <tr><td><b>Trend insights</b></td><td>Anonymous, aggregated data on which looks win for which bodies and budgets</td><td>Later, at scale, never using individual or under-18 data</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-now">
+    <div class="eyebrow">Why now</div>
+    <h2 id="h-now">Six shifts make 2027 a good moment to start</h2>
+    <div class="why">
+      <div><b>The AI wave left a gap</b><span>Every funded player builds AI that generates looks. Human judgment is the missing layer, and only 2% of young people trust AI here.</span></div>
+      <div><b>The incumbents stepped back</b><span>Covet's revenue has fallen sharply since 2019 and Drest moved to luxury sponsorships. Nobody holds the mid-market lane.</span></div>
+      <div><b>Gen Z is trading down</b><span>58% of shoppers have bought a dupe, and buyers now want quality too. "Affordable and good" is the brief.</span></div>
+      <div><b>App store fees fell</b><span>Since April 2026, US iOS apps can send players to web checkout with no Apple fee, and Google's US rate dropped to 20%. (A court may still set a fee for Apple.)</span></div>
+      <div><b>Adults play styling games</b><span>Adults are 37% of US Roblox daily users and growing 18% a year. Dress to Impress drew 10.4B visits with no paid ads.</span></div>
+      <div><b>Small brands want a first</b><span>Princess Polly, Oh Polly, Edikted and Good American have never done a game deal. Being their first playable catalog is a real pitch.</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-plan">
+    <div class="eyebrow">Go-to-market</div>
+    <h2 id="h-plan">Prove demand before building, with clear go and no-go gates</h2>
+    <div class="phases">
+      <div class="phase now">
+        <span class="when">Phase 1 · Weeks 1–8</span>
+        <h3>Test demand with content</h3>
+        <ul>
+          <li>TikTok and Instagram account running "the look for under $150" challenges</li>
+          <li>Followers submit looks; the community votes in polls and comments</li>
+          <li>One wave of 10 micro-creators (midsize, petite, plus-size, budget)</li>
+          <li>Pitch 10 small brands on a free "exposure for items" swap</li>
+        </ul>
+        <div class="gate"><b>Go if</b>~1,000 engaged followers, 50+ submissions per challenge, 3 interested brands</div>
+      </div>
+      <div class="phase">
+        <span class="when">Phase 2 · Weeks 8–16</span>
+        <h3>Test the game on mobile web</h3>
+        <ul>
+          <li>Simple web prototype: collage board, daily brief, coins at real prices, head-to-head voting</li>
+          <li>200 players invited from the content audience</li>
+          <li>Test a $4.99 coin pack and shoppable clicks</li>
+        </ul>
+        <div class="gate"><b>Go if</b>Day-30 retention near 4% (top 10% of games; the median is under 1%)</div>
+      </div>
+      <div class="phase">
+        <span class="when">Phase 3 · Month 5 onward</span>
+        <h3>Build the real thing</h3>
+        <ul>
+          <li>Game-design cofounder or lead hire</li>
+          <li>Legal review of age rules, brand permissions and naming</li>
+          <li>Native app with avatar, launched 18+ in the US</li>
+          <li>Pre-seed raise backed by real traction</li>
+        </ul>
+        <div class="gate"><b>Go if</b>Retention holds, a paying-player rate near 1–2%, signed brand partners</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Benchmark</th><th>Median game</th><th>Top 10%</th><th>Target</th></tr></thead>
+        <tbody>
+          <tr><td>Day-1 retention</td><td class="num">~22%</td><td class="num">~40%</td><td class="num"><b>40%</b></td></tr>
+          <tr><td>Day-7 retention</td><td class="num">~4%</td><td class="num">~11–12%</td><td class="num"><b>12%</b></td></tr>
+          <tr><td>Day-30 retention</td><td class="num">~0.7%</td><td class="num">~4%</td><td class="num"><b>4%</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small">Source: <a href="https://gamedevreports.substack.com/p/gameanalytics-mobile-and-pc-game" style="color:inherit">GameAnalytics 2026 benchmarks</a>.</p>
+  </section>
+
+  <section aria-labelledby="h-risk">
+    <div class="eyebrow">Risks</div>
+    <h2 id="h-risk">The risks are known, and each one has a plan</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Risk</th><th>Level</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td><b>Players don't come back</b></td><td class="part">High</td><td>Gate every build step on retention; daily briefs, seasonal events and rank progression</td></tr>
+          <tr><td><b>Cost of drawing every item on every body</b></td><td class="part">High</td><td>Start with 4–5 bodies and a small catalog; collage board before an avatar; brands supply assets</td></tr>
+          <tr><td><b>Unfair voting</b></td><td class="part">Medium-high</td><td>Head-to-head pairs, voter reputation, no downvotes, never sell vote boosts</td></tr>
+          <tr><td><b>Brand permission to show items</b></td><td class="part">Medium</td><td>Covet's model: free exposure swaps with written opt-in; product feeds only for prices and links</td></tr>
+          <tr><td><b>Event names and "dupe" wording</b></td><td class="part">Medium</td><td>"Desert festival," "Gala night," "The look for under $150"; no celebrity or designer names</td></tr>
+          <tr><td><b>Age rules</b></td><td class="part">Medium</td><td>Launch 18+ (17+ store rating), US first; build a teen mode later as a separate setup</td></tr>
+          <tr><td><b>A big player copies it</b></td><td class="part">Medium</td><td>The moat is the voting community, voter reputation, brand rights and data on which looks win</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-ask">
+    <div class="ask">
+      <span class="eyebrow">What it takes to start</span>
+      <h2 id="h-ask">About 16 weeks and roughly $10–20K to know if this is a business</h2>
+      <div class="ask-grid">
+        <div><b>Budget</b><span>Creator wave ($5–15K), prototype tools (low thousands or less), one legal consult. All estimates.</span></div>
+        <div><b>People</b><span>A game designer or game artist to advise, and introductions to small mid-market brands.</span></div>
+        <div><b>Outcome</b><span>Real numbers on demand, retention and brand interest, ready for a pre-seed conversation.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>About the numbers.</b> Research as of 21 November 2026 from public sources. Search volumes, brand revenues, Covet and Dress to Impress revenue, and revenue-per-player ranges are third-party or own estimates. The 94% "nothing to wear" figure comes from a summary whose sample could not be checked. Legal points are planning analysis, not legal advice.</p>
+    <p>Full research: <i>Mid market styling game landscape</i> and <i>Styling game demand and platform</i> reports.</p>
+  </footer>
+</div>
+
+<div id="tip" hidden></div>
+<script>
+(() => {
+  const tip = document.getElementById('tip');
+  const show = (el, x, y) => {
+    tip.textContent = el.getAttribute('data-tip');
+    tip.hidden = false;
+    const r = tip.getBoundingClientRect();
+    let left = x + 12, top = y + 14;
+    if (left + r.width > innerWidth - 8) left = x - r.width - 12;
+    if (top + r.height > innerHeight - 8) top = y - r.height - 12;
+    tip.style.left = Math.max(8, left) + 'px';
+    tip.style.top = Math.max(8, top) + 'px';
+  };
+  const hide = () => { tip.hidden = true; };
+  document.querySelectorAll('[data-tip]').forEach(el => {
+    el.addEventListener('pointermove', e => show(el, e.clientX, e.clientY));
+    el.addEventListener('pointerleave', hide);
+    el.addEventListener('focus', () => { const b = el.getBoundingClientRect(); show(el, b.left + b.width / 2, b.top); });
+    el.addEventListener('blur', hide);
+  });
+  addEventListener('scroll', hide, { passive: true });
+})();
+</script>
