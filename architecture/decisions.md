@@ -30,6 +30,7 @@
 | D18 | Voting | No penalty for voting against the crowd. Only mechanical abuse is filtered |
 | D19 | Voting | Voters never see their own look |
 | D20 | Voting | Entrants can vote in their own challenge. Drift is measured, not punished |
+| D21 | Voting rewards | Voting pays Tags only. Tags come from the daily gift, voting, or buying (with coins or real money) |
 
 ---
 
@@ -175,6 +176,21 @@
 - **Why:** players are the voter pool, and few people play a game only to vote.
 - **Safeguard:** measure whether entrants' votes drift from non-entrants' in the same challenge. Act only if data shows real gaming.
 
+### D21. Voting pays Tags only
+- **Decision:** the only reward for voting is Tags. No coins, streaks or badges for voting.
+- **The Tags loop:**
+  ```
+            ┌── Daily gift: x Tags (free, up to the cap of y)
+  Tags  ◄───┼── Voting: Tags every 3 votes (free)
+            └── Buying: with coins or real money (bought Tags can go above the cap)
+    │
+    ▼
+  Challenge entry (5 Tags)
+  ```
+- **New compared with `context.md`:** Tags can be bought with game coins, not only real money. The coin-to-Tag exchange rate is set in the economy area.
+- **Constraint for the economy area:** the daily gift must be smaller than a regular player's entry habit, or voting becomes pointless. About 8–9 challenges a week × 5 Tags is ~45 Tags a week. The placeholder of 10 a day (70 a week) is too generous. Roughly 3–5 a day is the range to test.
+- **Proposed safeguard:** a daily cap on Tags earned from voting (to stop bot farming). Voting itself can continue past the cap.
+
 ---
 
 ## Parked items
@@ -188,8 +204,7 @@
 
 | # | Question | Options | Recommendation |
 |---|---|---|---|
-| Q8 | How do scores become stars? | PM's starting point: a look's % of head-to-heads won → stars. Still to settle: whether opponent strength needs adjusting, and curve vs absolute bands | Revisit after voting rewards |
-| Q9 | Voting rewards | Tags per 3 votes (existing) + a daily voting goal + a streak + a Juror rank badge (status only) + a daily reward cap. Rule: reward effort, never agreement with the majority | Daily goal pays Tags and cosmetics, minimal coins |
+| Q8 | How do scores become stars? | Rule: a look's % of head-to-heads won → stars. A: fixed thresholds (e.g. 80%+ = 5★). B: ranked within the challenge (e.g. top 10% = 5★) | A, with a 1-star floor; payouts tuned through coins per star |
 | — | Daily challenge from launch, or start lighter in Phase 2? | Daily from launch, or 3 a week + weekly | Daily from launch (assumed in D12) |
 
 ## Areas still to cover
