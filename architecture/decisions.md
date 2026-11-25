@@ -25,6 +25,11 @@
 | D13 | Challenges | Series: linked challenges with one story, running in the daily or weekly slot |
 | D14 | Rewards | Every challenge pays rewards. Entering every episode of a series earns a bigger completion bonus |
 | D15 | Rewards | All rewards are in-game only (coins, items, Tags, cosmetics, badges) |
+| D16 | Voting | No Skip. Every pair needs a pick |
+| D17 | Voting | The system serves one challenge at a time to vote on. Players can't browse challenges |
+| D18 | Voting | No penalty for voting against the crowd. Only mechanical abuse is filtered |
+| D19 | Voting | Voters never see their own look |
+| D20 | Voting | Entrants can vote in their own challenge. Drift is measured, not punished |
 
 ---
 
@@ -138,6 +143,40 @@
 
 ---
 
+## Voting and ranking
+
+### Voting flow (draft, agreed in principle)
+1. The player opens the Vote tab and the system serves the next pair from **one challenge** (D17).
+2. The brief is at the top (client, body, occasion, budget, goal). Voters judge against the brief.
+3. Two anonymous looks on the same body, as layered avatars, each showing total price against budget. No usernames or ranks.
+4. The player taps one. No Skip (D16), no downvote.
+5. Both looks' current stars appear ("may change before the challenge ends"), then the next pair loads.
+
+**Behind the scenes:** looks with the fewest head-to-heads are served first so every entry reaches the minimum (proposed 20). A voter never sees their own look or the same pair twice.
+
+### D16. No Skip
+- **Decision:** every pair needs a pick.
+- **Note:** close calls add noise, which averages out over 20+ head-to-heads.
+
+### D17. One challenge at a time
+- **Decision:** the system chooses which challenge a player votes on. Players can't scroll or choose.
+- **Why:** gives control over the timeline, so every entry reaches its minimum head-to-heads before results.
+
+### D18. No penalty for taste
+- **Decision:** voters are never weighted down for disagreeing with the majority. Style is subjective.
+- **What we do filter:** mechanical abuse only (bots, sub-second taps, always picking the same side).
+- **Replaces:** the earlier "more weight for trusted voters" idea in `context.md`.
+
+### D19. Never vote on your own look
+- **Decision:** a voter's own look is never served to them.
+
+### D20. Entrants can vote in their own challenge
+- **Decision:** yes.
+- **Why:** players are the voter pool, and few people play a game only to vote.
+- **Safeguard:** measure whether entrants' votes drift from non-entrants' in the same challenge. Act only if data shows real gaming.
+
+---
+
 ## Parked items
 
 | ID | Item | Notes |
@@ -149,7 +188,8 @@
 
 | # | Question | Options | Recommendation |
 |---|---|---|---|
-| Q8 | How do scores become stars? | A: graded on a curve. B: absolute win rate. C: curve with a floor (every entry gets at least 1 star, small bottom band) | C, with band percentages as live settings |
+| Q8 | How do scores become stars? | PM's starting point: a look's % of head-to-heads won → stars. Still to settle: whether opponent strength needs adjusting, and curve vs absolute bands | Revisit after voting rewards |
+| Q9 | Voting rewards | Tags per 3 votes (existing) + a daily voting goal + a streak + a Juror rank badge (status only) + a daily reward cap. Rule: reward effort, never agreement with the majority | Daily goal pays Tags and cosmetics, minimal coins |
 | — | Daily challenge from launch, or start lighter in Phase 2? | Daily from launch, or 3 a week + weekly | Daily from launch (assumed in D12) |
 
 ## Areas still to cover
