@@ -10,6 +10,7 @@ A mid-market styling game: players style real, affordable outfits for real-life 
 |---|---|
 | `main` | This README. Reserved for the product build later |
 | `project-materials` | Concept, research, pitch report, mockup and images |
+| `architecture-decisions` | Tech-design decision log (`architecture/decisions.md`) |
 
 ## Start here
 
