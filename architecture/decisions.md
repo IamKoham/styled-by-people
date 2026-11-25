@@ -31,6 +31,7 @@
 | D19 | Voting | Voters never see their own look |
 | D20 | Voting | Entrants can vote in their own challenge. Drift is measured, not punished |
 | D21 | Voting rewards | Voting pays Tags only. Tags come from the daily gift, voting, or buying (with coins or real money) |
+| D22 | Stars | % of head-to-heads won maps to stars by fixed thresholds. The percentage is never shown to players |
 
 ---
 
@@ -191,6 +192,16 @@
 - **Constraint for the economy area:** the daily gift must be smaller than a regular player's entry habit, or voting becomes pointless. About 8–9 challenges a week × 5 Tags is ~45 Tags a week. The placeholder of 10 a day (70 a week) is too generous. Roughly 3–5 a day is the range to test.
 - **Proposed safeguard:** a daily cap on Tags earned from voting (to stop bot farming). Voting itself can continue past the cap.
 
+### D22. Stars from fixed thresholds, percentage hidden
+- **Decision:** a look's share of head-to-heads won converts to stars with fixed bands, the same in every challenge. Everyone gets at least 1 star. **Players never see the percentage**, only stars, so the star system stays intact and a low score doesn't feel bad.
+- **Starting bands (live setting):** 80%+ = 5★, 60–79% = 4★, 40–59% = 3★, 20–39% = 2★, under 20% = 1★.
+- **What it means for the build:**
+  - The percentage never leaves the server. The API returns star counts only.
+  - The "current stars" shown after a vote follow the same rule.
+  - Payouts are tuned through coins per star (live setting), not by changing the bands.
+  - Raw win rates are kept internally for brand reports and stylist reputation.
+- **Later option:** because the percentage is hidden, the score behind the stars could be adjusted for opponent strength with no visible change to players. Not adopted.
+
 ---
 
 ## Parked items
@@ -204,7 +215,7 @@
 
 | # | Question | Options | Recommendation |
 |---|---|---|---|
-| Q8 | How do scores become stars? | Rule: a look's % of head-to-heads won → stars. A: fixed thresholds (e.g. 80%+ = 5★). B: ranked within the challenge (e.g. top 10% = 5★) | A, with a 1-star floor; payouts tuned through coins per star |
+| Q10 | What if a challenge gets too few votes (under 20 head-to-heads per entry)? | A: extend voting automatically, up to a limit, then release. B: release on time anyway. C: extend, then refund Tags and give a flat 3 stars | A, with the Vote tab pushing the struggling challenge first |
 | — | Daily challenge from launch, or start lighter in Phase 2? | Daily from launch, or 3 a week + weekly | Daily from launch (assumed in D12) |
 
 ## Areas still to cover
