@@ -32,6 +32,9 @@
 | D20 | Voting | Entrants can vote in their own challenge. Drift is measured, not punished |
 | D21 | Voting rewards | Voting pays Tags only. Tags come from the daily gift, voting, or buying (with coins or real money) |
 | D22 | Stars | % of head-to-heads won maps to stars by fixed thresholds. The percentage is never shown to players |
+| D23 | Scoring | 1 point to the winner of each head-to-head, 0 to the loser. A look's score is its average. No minimum number of votes |
+| D24 | Voting | Pairing aims for roughly equal head-to-heads for every look, and never zero |
+| D25 | Scoring | Zero votes: refund entry Tags, show "No votes this time", keep the look, count it for the series bonus |
 
 ---
 
@@ -119,7 +122,7 @@
 - **Decision:** a challenge's submission window closes before its voting window opens.
 - **Why:** it's fair (every entry gets the same voting window) and **players can't copy looks** they've seen in the Vote tab.
 - **What it means for the build:** challenge state machine `scheduled → open for submissions → voting → tallying → results`. Overlapping challenges keep the Vote tab busy.
-- **Still to decide:** the minimum number of head-to-heads per entry (proposal: 20). If votes fall short, lengthen the voting window rather than lower the minimum.
+- **Superseded:** the proposed minimum of 20 head-to-heads was dropped. See D23–D25.
 
 ### D12. Staggered calendar
 - **Decision (assumed, confirm):**
@@ -202,6 +205,17 @@
   - Raw win rates are kept internally for brand reports and stylist reputation.
 - **Later option:** because the percentage is hidden, the score behind the stars could be adjusted for opponent strength with no visible change to players. Not adopted.
 
+### D23. Points per head-to-head, averaged
+- **Decision:** each head-to-head gives the winner 1 point and the loser 0. A look's score is its average (0 to 1), which maps to stars by D22's bands. There's no minimum number of votes before results: like a Google rating, a look with one win out of one shows 5 stars.
+- **Why it beats absolute ratings:** people judge "which of these two works better" far more consistently than "rate this 1–5", and head-to-heads don't drift upward the way star ratings do.
+- **Replaces:** the proposed minimum of 20 head-to-heads (D11) and pending question Q10.
+
+### D24. Even circulation
+- **Decision:** the pairing logic gives every look in a challenge roughly the same number of head-to-heads, and never zero. This is a goal for the Vote tab's queue (D17), not a threshold the challenge waits for.
+
+### D25. Zero votes
+- **Decision:** if a look still gets no votes: refund its entry Tags, show "No votes this time" instead of stars, keep it in My looks (saved and shoppable), and count it as a completed episode for any series bonus.
+
 ---
 
 ## Parked items
@@ -215,7 +229,7 @@
 
 | # | Question | Options | Recommendation |
 |---|---|---|---|
-| Q10 | What if a challenge gets too few votes (under 20 head-to-heads per entry)? | A: extend voting automatically, up to a limit, then release. B: release on time anyway. C: extend, then refund Tags and give a flat 3 stars | A, with the Vote tab pushing the struggling challenge first |
+| Q11 | How many coins does a $4.99 pack buy? (coins are pegged 1:1 to real prices) | 100 (a $65 outfit ≈ $3.25), 500 (≈ $0.65), 1,500 (≈ $0.22) | ~500, so one pack ≈ 6–8 challenge looks; tune from Phase 2 data as a live setting |
 | — | Daily challenge from launch, or start lighter in Phase 2? | Daily from launch, or 3 a week + weekly | Daily from launch (assumed in D12) |
 
 ## Areas still to cover
@@ -224,8 +238,8 @@
 2. ~~Catalog and items~~ (except P1)
 3. ~~Avatar and rendering~~
 4. ~~Challenge lifecycle~~
-5. **Voting and ranking** (in progress: Q8, pairing logic, spite and bot detection, trusted voters)
-6. Economy: coins, Tags and wears as a ledger, purchases, fraud, web and app-store payments
+5. ~~Voting and ranking~~
+6. **Economy** (in progress: Q11): coins, Tags and wears as a ledger, purchases, fraud, web and app-store payments
 7. Commerce: Shop the look, affiliate attribution, sponsored challenges, brand portal
 8. Identity, social and safety: accounts, friends and borrowing, moderation, 18+ and a later teen mode
 9. Data and analytics: retention metrics for the Phase 2 go/no-go, the later trend-data product
