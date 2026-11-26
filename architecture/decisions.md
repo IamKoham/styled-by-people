@@ -35,6 +35,7 @@
 | D23 | Scoring | 1 point to the winner of each head-to-head, 0 to the loser. A look's score is its average. No minimum number of votes |
 | D24 | Voting | Pairing aims for roughly equal head-to-heads for every look, and never zero |
 | D25 | Scoring | Zero votes: refund entry Tags, show "No votes this time", keep the look, count it for the series bonus |
+| D26 | Economy | Free players get just enough to get going; anything extra means buying. The pressure is gentle, never a wall |
 
 ---
 
@@ -215,6 +216,47 @@
 
 ### D25. Zero votes
 - **Decision:** if a look still gets no votes: refund its entry Tags, show "No votes this time" instead of stars, keep it in My looks (saved and shoppable), and count it as a completed episode for any series bonus.
+
+---
+
+## Economy
+
+### D26. Just enough, gently
+- **Decision:** free players get just enough to get going. Anything extra means buying. The pressure must feel subtle, never like a wall, or it harms retention.
+- **Proposed rules for keeping it subtle:**
+  1. Never block the daily challenge. A free player who votes a little can always enter it.
+  2. Limit choice, not access. The pressure is "I wish I owned that blazer," not "you can't play."
+  3. Today's Rack creates the desire: try anything free, own it to use it in a challenge.
+  4. Offers appear at natural moments (a missing theme item, a last wear), never as pop-ups.
+  5. Start generously (starter closet). The pressure appears only once the habit exists.
+- **Method:** map sources and sinks, set anchor experiences per player type, derive the numbers, simulate, then tune live in Phase 2. Every number is a live setting.
+
+### Economy map
+```
+              COINS                                   TAGS
+IN:  starting grant, challenge prizes,        IN:  daily gift (x, cap y), voting,
+     series bonuses, packs, card/pass ($)          buy with coins, packs, card/pass ($)
+OUT: buy items (real price 1:1),              OUT: challenge entry (5 Tags)
+     buy Tags, rebuy when wears run out
+              CLOSET: items × wears left (slowly runs out, keeps coins needed)
+```
+Key connection: wears consumed per week (≈ entries × items per look) set coin demand, so wears per item and coin prizes must be tuned together.
+
+### Draft numbers (not decided; to be tested in the simulator)
+| Setting | Draft |
+|---|---|
+| Typical 3-item look | ~$140 (top ~$35, bottoms ~$45, shoes ~$60, outerwear ~$80, accessory ~$20) |
+| Wears per item | Basics 12, trend pieces 5 (average ~8) |
+| Starter closet | ~8 free basics |
+| Starting coins | 150 |
+| Coins per star | ~4 (3★ ≈ 12 coins), plus a bigger weekly prize and series bonuses |
+| Daily Tag gift | 4, cap 20 |
+| Voting | 2 Tags per 3 votes, up to 10 Tags a day |
+| Coins → Tags | 25 coins = 5 Tags |
+| Coin pack | $4.99 = 500 coins |
+| Monthly card | $4.99 = 50 coins + 3 Tags a day for 30 days |
+
+Target outcome: a dedicated free player enters every daily challenge, can do the weekly with extra voting, and ends each week about $20–30 of coins short of what they'd like.
 
 ---
 
